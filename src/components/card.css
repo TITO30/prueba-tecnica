@@ -1,0 +1,54 @@
+.card {
+    flex-direction: row;
+    justify-content: center;
+    background-color: #95dada;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
+}
+
+.card p{
+    font-family: 'Oswald', sans-serif;
+}
+
+.image{
+    width: 250px;
+    height: 300px;
+    border-radius: 100%;
+}
+
+.card ul{
+    text-align: left;
+    text-decoration: none;
+    list-style: none;
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-list{
+    width: 75vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:20px;
+}
+
+@media only screen and  (max-height:600px) {
+    .card-list{
+        width: 50vw;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns:1fr;
+        grid-gap:20px;
+    }
+}
+

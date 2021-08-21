@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import {Component} from 'react'
 import './App.css';
+import { CardList } from './components/card-list';
+import {SearchBox} from './components/seach-box'
 
-function App() {
+//Declaración de constructor y arreglo que almacenará los datos de la API
+class App extends Component{
+constructor(){
+  super();
+  this.state={
+    personajes:[],
+    searchField:'',
+    next:"",
+    previous:""
+  };
+  this.handleChange = this.handleChange.bind(this);
+}
+
+
+//
+
+componentDidMount = async () =>{
+    await fetch('https://rickandmortyapi.com/api/character')
+  .then(response => response.json())
+  .then(resp => this.setState({personajes:resp.results}));
+}
+
+handleChange = (e)=>{
+  this.setState({searchField: e.target.value})
+}
+
+render() {
+  const{personajes,searchField} = this.state;
+  const filteredpersonajes = personajes.filter(personajes => 
+    personajes.name.toLowerCase().includes(searchField.toLowerCase()))
+  
+  console.log(personajes);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Rick and Morty API</h1>
+      <SearchBox 
+      placeholder='Search your favorite character'
+      handleChange={this.handleChange }/>
+      <button>After</button>
+      <button>Next</button>
+
+      <CardList personajes={filteredpersonajes}/>
     </div>
   );
+}
 }
 
 export default App;
