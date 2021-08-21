@@ -1,4 +1,4 @@
-.card {
+.card-character {
     flex-direction: row;
     justify-content: center;
     background-color: #95dada;
@@ -12,7 +12,7 @@
     transition: transform 0.25s ease-out;
 }
 
-.card p{
+.card-character p{
     font-family: 'Oswald', sans-serif;
 }
 
@@ -22,7 +22,7 @@
     border-radius: 100%;
 }
 
-.card ul{
+.card-character ul{
     text-align: left;
     text-decoration: none;
     list-style: none;
@@ -30,25 +30,26 @@
     padding-top: 5px;
 }
 
-.card:hover {
+.card-character:hover {
     transform: scale(1.05);
 }
 
 .card-list{
-    width: 75vw;
+    width: 90vw;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap:20px;
 }
 
-@media only screen and  (max-height:600px) {
+
+@media (max-width:1000px) {
     .card-list{
-        width: 50vw;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns:1fr;
-        grid-gap:20px;
-    }
+    width: 50vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap:20px;
+}
 }
 

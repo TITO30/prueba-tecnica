@@ -1,53 +1,82 @@
-import {Component} from 'react'
-import './App.css';
-import { CardList } from './components/card-list';
-import {SearchBox} from './components/seach-box'
+import { Component } from "react";
+import "./App.css";
+import { CardList } from "./components/card-list";
+import { SearchBox } from "./components/seach-box";
 
 //Declaración de constructor y arreglo que almacenará los datos de la API
-class App extends Component{
-constructor(){
-  super();
-  this.state={
-    personajes:[],
-    searchField:'',
-    next:"",
-    previous:""
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      personajes: [],
+      searchField: "",
+      currentpage: 1,
+      postperpage: 6,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  //
+
+  componentDidMount = () => {
+    this.fetchData(this.currentpage);
   };
-  this.handleChange = this.handleChange.bind(this);
-}
 
+  fetchData = async () => {
+    await fetch(
+      `https://rickandmortyapi.com/api/character/?page=${this.state.currentpage}`
+    )
+      .then((res) => res.json())
+      .then((response) => this.setState({ personajes: response.results }));
+  };
 
-//
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  };
 
-componentDidMount = async () =>{
-    await fetch('https://rickandmortyapi.com/api/character')
-  .then(response => response.json())
-  .then(resp => this.setState({personajes:resp.results}));
-}
+  render() {
+    const { personajes, searchField, currentpage } = this.state;
+    const filteredpersonajes = personajes.filter((personajes) =>
+      personajes.name.toLowerCase().includes(searchField.toLowerCase())
+    );
 
-handleChange = (e)=>{
-  this.setState({searchField: e.target.value})
-}
+    const previouspage = async () => {
+      if (currentpage > 1) {
+        await this.setState({ currentpage: currentpage - 1 });
+        this.fetchData(currentpage);
+      } else {
+      }
+    };
 
-render() {
-  const{personajes,searchField} = this.state;
-  const filteredpersonajes = personajes.filter(personajes => 
-    personajes.name.toLowerCase().includes(searchField.toLowerCase()))
-  
-  console.log(personajes);
-  return (
-    <div className="App">
-      <h1>Rick and Morty API</h1>
-      <SearchBox 
-      placeholder='Search your favorite character'
-      handleChange={this.handleChange }/>
-      <button>After</button>
-      <button>Next</button>
+    const nextpage = async () => {
+      await this.setState({ currentpage: currentpage + 1 });
+      this.fetchData(currentpage);
+    };
 
-      <CardList personajes={filteredpersonajes}/>
-    </div>
-  );
-}
+    console.log(currentpage);
+    console.log(personajes);
+    return (
+      <div className="App">
+        <h1>Rick and Morty API</h1>
+        <div className="mb-4">
+          <SearchBox
+            placeholder="Search your favorite character"
+            handleChange={this.handleChange}
+          />
+
+          <div className="d-flex justify-content-evenly">
+            <button className="btn-primary" onClick={previouspage}>
+              Previous
+            </button>
+            <button className="btn-primary" onClick={nextpage}>
+              Next
+            </button>
+          </div>
+        </div>
+        <CardList personajes={filteredpersonajes} />
+      </div>
+    );
+  }
 }
 
 export default App;

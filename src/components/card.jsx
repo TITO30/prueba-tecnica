@@ -2,7 +2,7 @@ import React from 'react';
 import'./card.css';
 
 export const Card=(props)=>(
-    <div className='card'>
+    <div className='card-character'>
         <img alt="personajes" className='image' src={props.personajes.image}></img>
         <h3>{props.personajes.name}</h3>
         <ul>
