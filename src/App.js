@@ -10,8 +10,7 @@ class App extends Component {
     this.state = {
       personajes: [],
       searchField: "",
-      currentpage: 1,
-      postperpage: 6,
+      currentpage: 1
     };
     this.handleChange = this.handleChange.bind(this);
   }
