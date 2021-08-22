@@ -1,3 +1,9 @@
+Lo primero que se debe hacer es clonar el repositorio con git clone
+### `git clone  https://github.com/TITO30/prueba-tecnica`
+
+En la consola que se tenga se debe ejecutar
+### `npm install`
+
 # Introducción a la aplicación Create React
 
 Este proyecto se inició con [Create React App](https://github.com/facebook/create-react-app).
@@ -69,3 +75,4 @@ Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/d
 ### `yarn build` fails to minify
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
